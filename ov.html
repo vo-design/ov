@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      background:linear-gradient(135deg,#000000,#021B3A,#0A4D68);
+      overflow-x:hidden;
+      color:white;
+      text-align:center;
+    }
+
+    /* Floating Hearts */
+
+    .heart{
+      position:fixed;
+      bottom:-20px;
+      color:#ff4d6d;
+      animation:float 8s linear infinite;
+      font-size:22px;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(0) rotate(0deg);
+        opacity:1;
+      }
+
+      100%{
+        transform:translateY(-100vh) rotate(360deg);
+        opacity:0;
+      }
+    }
+
+    /* Hero Section */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+
+    .hero h1{
+      font-size:3rem;
+      margin-bottom:20px;
+      color:#7FDBFF;
+      animation:glow 2s infinite alternate;
+    }
+
+    .hero p{
+      max-width:700px;
+      font-size:1.2rem;
+      line-height:2;
+      color:#dbefff;
+    }
+
+    @keyframes glow{
+      from{
+        text-shadow:0 0 10px #00bfff;
+      }
+
+      to{
+        text-shadow:0 0 30px #0077ff;
+      }
+    }
+
+    button{
+      margin-top:30px;
+      padding:15px 35px;
+      border:none;
+      border-radius:50px;
+      background:#00bfff;
+      color:white;
+      font-size:1rem;
+      cursor:pointer;
+      transition:0.4s;
+      font-weight:bold;
+      box-shadow:0 0 20px rgba(0,191,255,0.5);
+    }
+
+    button:hover{
+      transform:scale(1.08);
+      background:#008cff;
+    }
+
+    /* Hidden Message */
+
+    #message{
+      display:none;
+      padding:60px 20px;
+      background:rgba(255,255,255,0.08);
+      backdrop-filter:blur(10px);
+    }
+
+    #message h2{
+      font-size:2.2rem;
+      margin-bottom:20px;
+      color:#7FDBFF;
+    }
+
+    #message p{
+      max-width:800px;
+      margin:auto;
+      line-height:2;
+      font-size:1.1rem;
+      color:#dbefff;
+    }
+
+    /* Gallery */
+
+    .gallery-section{
+      padding:70px 20px;
+    }
+
+    .gallery-section h2{
+      font-size:2.5rem;
+      margin-bottom:40px;
+      color:#7FDBFF;
+    }
+
+    .gallery{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:20px;
+    }
+
+    .gallery img{
+      width:280px;
+      max-width:90%;
+      height:350px;
+      object-fit:cover;
+      border-radius:20px;
+      transition:0.4s;
+      border:2px solid rgba(0,191,255,0.3);
+      box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    }
+
+    .gallery img:hover{
+      transform:scale(1.03);
+      box-shadow:0 0 25px rgba(0,191,255,0.6);
+    }
+
+    /* Timeline */
+
+    .timeline{
+      padding:70px 20px;
+    }
+
+    .timeline h2{
+      font-size:2.5rem;
+      margin-bottom:40px;
+      color:#7FDBFF;
+    }
+
+    .card{
+      width:90%;
+      max-width:700px;
+      margin:20px auto;
+      background:rgba(255,255,255,0.08);
+      padding:30px;
+      border-radius:25px;
+      backdrop-filter:blur(10px);
+      transition:0.4s;
+      border:1px solid rgba(0,191,255,0.2);
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 0 25px rgba(0,191,255,0.4);
+    }
+
+    .card h3{
+      margin-bottom:15px;
+      font-size:1.6rem;
+      color:#7FDBFF;
+    }
+
+    .card p{
+      line-height:1.8;
+      font-size:1rem;
+      color:#dbefff;
+    }
+
+    /* Final Section */
+
+    .final{
+      padding:80px 20px;
+      background:rgba(0,0,0,0.4);
+    }
+
+    .final h2{
+      font-size:2.5rem;
+      margin-bottom:20px;
+      color:#7FDBFF;
+    }
+
+    .final p{
+      max-width:700px;
+      margin:auto;
+      line-height:2;
+      font-size:1.1rem;
+      color:#dbefff;
+    }
+
+    /* Music */
+
+    audio{
+      margin:30px 0 50px;
+      width:280px;
+    }
+
+    /* Mobile Responsive */
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:2.2rem;
+      }
+
+      .hero p{
+        font-size:1rem;
+        line-height:1.8;
+      }
+
+      button{
+        padding:14px 28px;
+      }
+
+      .gallery img{
+        width:95%;
+        height:auto;
+      }
+
+      .gallery-section h2,
+      .timeline h2,
+      .final h2{
+        font-size:2rem;
+      }
+
+      #message h2{
+        font-size:2rem;
+      }
+
+      .card{
+        padding:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating Hearts -->
+
+  <div class="heart" style="left:10%; animation-delay:0s;">❤️</div>
+  <div class="heart" style="left:25%; animation-delay:2s;">🖤</div>
+  <div class="heart" style="left:40%; animation-delay:4s;">❤️</div>
+  <div class="heart" style="left:55%; animation-delay:1s;">🖤</div>
+  <div class="heart" style="left:70%; animation-delay:3s;">❤️</div>
+  <div class="heart" style="left:85%; animation-delay:5s;">🖤</div>
+
+  <!-- Hero Section -->
+
+  <section class="hero">
+
+    <h1>Happy Birthday My Favorite Person</h1>
+
+    <p>
+      Thank you for every effort, every smile,
+      every late-night conversation,
+      and every moment you give to our relationship.
+      You make my life peaceful, beautiful, and special.
+    </p>
+
+    <button onclick="showMessage()">
+      Click Here
+    </button>
+
+  </section>
+
+  <!-- Hidden Message -->
+
+  <section id="message">
+
+    <h2>You Mean So Much To Me</h2>
+
+    <p>
+      Even though ours is an arranged marriage,
+      I truly feel lucky to have found someone like you.
+
+      Your care, patience, understanding,
+      and efforts make me feel special every day.
+
+      You make me feel safe,
+      respected,
+      valued,
+      and genuinely happy.
+
+      Thank you for always trying,
+      for making me smile,
+      and for making our relationship beautiful.
+
+      I cannot wait to create
+      a lifetime of memories with you.
+    </p>
+
+  </section>
+
+  <!-- Memories Section -->
+
+  <section class="gallery-section">
+
+    <h2>Our Beautiful Memories ✨</h2>
+
+    <div class="gallery">
+
+      <img src="our.png" alt="">
+      <img src="one.jpeg" alt="">
+      <img src="two.jpeg" alt="">
+
+    </div>
+
+  </section>
+
+  <!-- Timeline -->
+
+  <section class="timeline">
+
+    <h2>Our Journey Together</h2>
+
+    <div class="card">
+      <h3>First Conversation ✨</h3>
+      <p>
+        The moment we started talking,
+        I felt a different kind of comfort with you.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Your Efforts ❤️</h3>
+      <p>
+        Every small effort you make
+        means more to me than you know.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Forever Starts Here 🖤</h3>
+      <p>
+        This is only the beginning
+        of our forever story together.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- Final Message -->
+
+  <section class="final">
+
+    <h2>Always With You ❤️</h2>
+
+    <p>
+      Happy Birthday to the person
+      who makes my heart feel calm,
+      valued,
+      and truly happy.
+
+      Thank you for being part of my life.
+    </p>
+
+  </section>
+
+  <!-- Music -->
+
+  <audio autoplay loop controls>
+    <source src="song.mp3" type="audio/mp3">
+  </audio>
+
+  <!-- JavaScript -->
+
+  <script>
+
+    function showMessage(){
+
+      document.getElementById("message").style.display = "block";
+
+      window.scrollTo({
+        top: document.getElementById("message").offsetTop,
+        behavior:'smooth'
+      });
+
+    }
+
+  </script>
+
+</body>
+</html>
